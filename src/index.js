@@ -1,7 +1,7 @@
 import './styles/style.css';
-import refreshSrc from './refresh-svgrepo-com.svg';
-import editSrc from './three-dots-svgrepo-com.svg';
-import enterSrc from './arrow-enter-svgrepo-com.svg';
+import refreshSrc from './assets/refresh-svgrepo-com.svg';
+import editSrc from './assets/three-dots-svgrepo-com.svg';
+import enterSrc from './assets/arrow-enter-svgrepo-com.svg';
 
 const refreshIcon = document.querySelector('#refresh');
 const todoList = document.getElementById('todo-list-content');
