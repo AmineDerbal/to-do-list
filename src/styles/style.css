@@ -1,0 +1,58 @@
+body {
+  box-sizing: border-box;
+}
+
+.reload-icon,
+.edit-icon,
+#enter-Button {
+  width: 15px;
+  cursor: pointer;
+}
+
+#add-task {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#add-task-text {
+  border: none;
+  width: 80%;
+}
+
+#todo-day-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#todo-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+#todo-list-content {
+  width: 50%;
+  padding: 0;
+}
