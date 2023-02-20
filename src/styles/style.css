@@ -10,7 +10,7 @@ body {
 }
 
 #add-task {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -24,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  width: 100%;
   gap: 10px;
 }
 
@@ -49,11 +49,13 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
+  width: 60%;
   gap: 10px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
 #todo-list-content {
-  width: 50%;
+  width: 100%;
   padding: 0;
 }
