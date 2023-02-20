@@ -33,6 +33,7 @@ body {
   align-items: center;
   gap: 10px;
   justify-content: space-between;
+  padding: 0.5rem 0;
 }
 
 ul {
