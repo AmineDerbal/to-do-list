@@ -7,9 +7,6 @@ export const appendTodoElement = (todo, list) => {
   const todoElement = document.createElement('li');
   todoElement.className = 'todo-item';
 
-  const todoDescription = document.createElement('span');
-  todoDescription.innerHTML = `<span><textarea class="todo-description" rows="1" maxlength="100"> ${todo.description}</textarea></span>`;
-
   const edit = new Image();
   edit.src = editSrc;
   edit.className = 'edit-icon';
@@ -25,7 +22,10 @@ export const appendTodoElement = (todo, list) => {
   todoElement.setAttribute('data-index', todo.index);
   todoElement.innerHTML = `<div class="todo-item-content"> <input class="checkbox" type="checkbox" ${
     todo.completed ? 'checked' : ''
-  } /> ${todoDescription.innerHTML} </div>`;
+  } /> <span> <textarea class="todo-description" data-index=${
+    todo.index
+  } rows="1" maxlength="100">${todo.description}</textarea> </span> </div>`;
+
   todoElement.appendChild(remove);
   todoElement.appendChild(edit);
   todoList.appendChild(todoElement);
@@ -35,4 +35,14 @@ export const clearTodoList = () => {
   todoList.innerHTML = '';
 };
 
-export default { appendTodoElement, clearTodoList };
+export const implementEdit = (list) => {
+  const todoEditData = document.querySelectorAll('.todo-description');
+  todoEditData.forEach((todo) => {
+    todo.addEventListener('input', (e) => {
+      const index = e.target.dataset.index - 1;
+      list.editTask(index, e.target.value);
+    });
+  });
+};
+
+export default { appendTodoElement, clearTodoList, implementEdit };

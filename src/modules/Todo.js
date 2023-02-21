@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { appendTodoElement, clearTodoList } from './handleDom.js';
+import { appendTodoElement, clearTodoList, implementEdit } from './handleDom.js';
 import { saveToLocalStorage } from './data.js';
 
 export default class Todo {
@@ -19,6 +19,7 @@ export default class Todo {
       appendTodoElement(this.list[i], this);
     }
     saveToLocalStorage(this.list);
+    implementEdit(this);
   };
 
   addTask = (task) => {
@@ -31,5 +32,11 @@ export default class Todo {
     this.list.splice(index, 1);
     saveToLocalStorage(this.list);
     this.renderList();
+  };
+
+  editTask = (index, description) => {
+    this.list[index].description = '';
+    this.list[index].description = description;
+    saveToLocalStorage(this.list);
   };
 }
