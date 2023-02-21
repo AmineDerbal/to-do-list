@@ -1,6 +1,13 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-cycle */
-import { appendTodoElement, clearTodoList, implementEdit } from './handleDom.js';
+import {
+  appendTodoElement,
+  clearTodoList,
+  implementEdit,
+  createClearCompletedElement,
+} from './handleDom.js';
 import { saveToLocalStorage } from './data.js';
+import implementCheckBoxEvents from './checkBox.js';
 
 export default class Todo {
   constructor(list = []) {
@@ -20,6 +27,8 @@ export default class Todo {
     }
     saveToLocalStorage(this.list);
     implementEdit(this);
+    implementCheckBoxEvents(this);
+    createClearCompletedElement(this);
   };
 
   addTask = (task) => {
@@ -38,5 +47,16 @@ export default class Todo {
     this.list[index].description = '';
     this.list[index].description = description;
     saveToLocalStorage(this.list);
+  };
+
+  toggleCompleted = (index) => {
+    this.list[index].completed = !this.list[index].completed;
+    saveToLocalStorage(this.list);
+  };
+
+  filterCompleted = () => {
+    this.list = this.list.filter((task) => !task.completed);
+    saveToLocalStorage(this.list);
+    this.renderList();
   };
 }

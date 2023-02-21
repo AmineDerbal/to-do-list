@@ -1,5 +1,6 @@
 body {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 .reload-icon,
@@ -42,6 +43,14 @@ body {
   resize: none;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
+.icon-hidden {
+  display: none;
+}
+
 .todo-description:focus {
   outline: none;
   white-space: nowrap;
@@ -72,6 +81,26 @@ ul {
 h1 {
   font-size: 2rem;
   text-align: center;
+}
+
+.editing {
+  background-color: #fffeca;
+  transition: 1s ease-in-out;
+}
+
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+#clear-completed {
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+}
+
+#clear-completed:hover {
+  color: #f00;
+  text-decoration: underline;
 }
 
 #todo-list-container {
