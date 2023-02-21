@@ -99,7 +99,7 @@ input[type='checkbox'] {
 }
 
 #clear-completed:hover {
-  color: #ff0000;
+  color: #f00;
   text-decoration: underline;
 }
 
