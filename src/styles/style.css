@@ -4,7 +4,8 @@ body {
 
 .reload-icon,
 .edit-icon,
-#enter-Button {
+#enter-Button,
+.remove-icon {
   width: 15px;
   cursor: pointer;
 }
@@ -17,7 +18,34 @@ body {
 
 #add-task-text {
   border: none;
-  width: 80%;
+  width: 90%;
+}
+
+#add-task-text:focus {
+  outline: none;
+}
+
+.todo-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.todo-item-content span {
+  width: 100%;
+}
+
+.todo-description {
+  width: 100%;
+  border: none;
+  resize: none;
+}
+
+.todo-description:focus {
+  outline: none;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 
 #todo-day-container {
@@ -34,6 +62,7 @@ body {
   gap: 10px;
   justify-content: space-between;
   padding: 0.5rem 0;
+  line-height: 1rem;
 }
 
 ul {
