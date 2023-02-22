@@ -11,13 +11,20 @@ export const appendTodoElement = (task, list) => {
   edit.src = editSrc;
   edit.className = 'edit-icon';
   edit.setAttribute('data-index', task.index);
+  edit.setAttribute('draggable', 'false');
 
   const remove = new Image();
   remove.src = removeSrc;
   remove.className = 'remove-icon icon-hidden';
   remove.setAttribute('data-index', task.index);
-  remove.addEventListener('click', () => {
+  remove.setAttribute('draggable', 'false');
+  remove.addEventListener('click', (e) => {
+    e.preventDefault();
     list.removeTask(task.index - 1);
+  });
+  remove.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+    console.log('dragstart');
   });
 
   todoElement.setAttribute('data-index', task.index);
@@ -51,9 +58,11 @@ const toggleHiddenIcon = (event, task) => {
   const listTag = document.querySelector(`li[data-index="${index}"]`);
   listTag.classList.toggle('editing');
   const removeIcon = document.querySelector(`.remove-icon[data-index="${index}"]`);
-  removeIcon.classList.toggle('icon-hidden');
   const editIcon = document.querySelector(`.edit-icon[data-index="${index}"]`);
-  editIcon.classList.toggle('icon-hidden');
+  setTimeout(() => {
+    removeIcon.classList.toggle('icon-hidden');
+    editIcon.classList.toggle('icon-hidden');
+  }, 1000);
 };
 
 export const implementEdit = (Todo) => {
@@ -83,5 +92,8 @@ export const createClearCompletedElement = (Todo) => {
 };
 
 export default {
-  appendTodoElement, clearTodoList, implementEdit, createClearCompletedElement,
+  appendTodoElement,
+  clearTodoList,
+  implementEdit,
+  createClearCompletedElement,
 };
