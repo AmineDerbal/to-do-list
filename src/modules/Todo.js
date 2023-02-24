@@ -24,7 +24,6 @@ export default class Todo {
       this.list[i].index = i + 1;
       appendTodoElement(this.list[i], this);
     }
-    //saveToLocalStorage(this.list);
     this.saveList();
     implementEdit(this);
     implementCheckBoxEvents(this);

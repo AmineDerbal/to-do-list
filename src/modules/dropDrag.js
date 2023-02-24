@@ -30,7 +30,6 @@ export const dragInteraction = (todo) => {
     });
     item.addEventListener('drop', (e) => {
       const dragEndIndex = +e.target.getAttribute('data-index');
-      console.log(dragEndIndex);
       const parent = e.target.closest('li');
       parent.classList.remove('over');
 
