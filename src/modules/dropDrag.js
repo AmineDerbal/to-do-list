@@ -21,18 +21,14 @@ export const dragInteraction = (todo) => {
       e.preventDefault();
     });
     item.addEventListener('dragenter', (e) => {
-      const parent = e.target.closest('li');
-      parent.classList.add('over');
+      e.target.closest('li').classList.add('over');
     });
     item.addEventListener('dragleave', (e) => {
-      const parent = e.target.closest('li');
-      parent.classList.remove('over');
+      e.target.closest('li').classList.remove('over');
     });
     item.addEventListener('drop', (e) => {
       const dragEndIndex = +e.target.getAttribute('data-index');
-      const parent = e.target.closest('li');
-      parent.classList.remove('over');
-
+      e.target.closest('li').classList.remove('over');
       swapItems(dragStartIndex, dragEndIndex, todo);
     });
   });
