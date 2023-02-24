@@ -29,7 +29,8 @@ refreshIcon.appendChild(imageRefresh);
 
 const submitTask = () => {
   if (taskInput.value !== '') {
-    todoListData.addTask(new Task(taskInput.value));
+    todoListData.list = todoListData.addTask(new Task(taskInput.value));
+    todoListData.renderList();
     taskInput.value = '';
   }
 };

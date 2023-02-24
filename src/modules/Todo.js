@@ -37,20 +37,18 @@ export default class Todo {
 
   addTask = (task) => {
     this.list.push(task);
-    saveToLocalStorage(this.list);
-    this.renderList();
+    return this.list;
   };
 
   removeTask = (index) => {
     this.list.splice(index, 1);
-    saveToLocalStorage(this.list);
-    this.renderList();
+    return this.list;
   };
 
   editTask = (index, description) => {
     this.list[index].description = '';
     this.list[index].description = description;
-    saveToLocalStorage(this.list);
+    return this.list;
   };
 
   toggleCompleted = (index) => {
@@ -60,7 +58,6 @@ export default class Todo {
 
   filterCompleted = () => {
     this.list = this.list.filter((task) => !task.completed);
-    saveToLocalStorage(this.list);
-    this.renderList();
+    return this.list;
   };
 }

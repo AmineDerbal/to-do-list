@@ -1,6 +1,6 @@
 const todoList = document.getElementById('todo-list-content');
 
-export const appendTodoElement = (task, list) => {
+export const appendTodoElement = (task, todo) => {
   const todoElement = document.createElement('li');
   todoElement.className = 'todo-item';
   todoElement.draggable = true;
@@ -15,7 +15,8 @@ export const appendTodoElement = (task, list) => {
   remove.setAttribute('draggable', 'false');
   remove.addEventListener('click', (e) => {
     e.preventDefault();
-    list.removeTask(task.index - 1);
+    todo.list = todo.removeTask(task.index - 1);
+    todo.renderList();
   });
 
   todoElement.setAttribute('data-index', task.index);
@@ -58,12 +59,13 @@ const toggleHiddenIcon = (event, task) => {
   }, 1000);
 };
 
-export const implementEdit = (Todo) => {
+export const implementEdit = (todo) => {
   const todoEditData = document.querySelectorAll('.todo-description');
   todoEditData.forEach((task) => {
     task.addEventListener('input', (e) => {
       const index = e.target.dataset.index - 1;
-      Todo.editTask(index, e.target.value);
+      todo.list = todo.editTask(index, e.target.value);
+      todo.saveList();
     });
     task.addEventListener('focusin', (e) => {
       toggleHiddenIcon(e, task);
@@ -74,13 +76,14 @@ export const implementEdit = (Todo) => {
   });
 };
 
-export const createClearCompletedElement = (Todo) => {
+export const createClearCompletedElement = (todo) => {
   const clearCompleted = document.createElement('button');
   clearCompleted.id = 'clear-completed';
   clearCompleted.textContent = 'Clear all completed';
   document.getElementById('todo-list-container').appendChild(clearCompleted);
   clearCompleted.addEventListener('click', () => {
-    Todo.filterCompleted();
+    todo.list = todo.filterCompleted();
+    todo.renderList();
   });
 };
 
