@@ -19,6 +19,7 @@ body {
 .edit-icon {
   cursor: move;
 }
+
 #add-task {
   width: 100%;
   display: flex;
