@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import './styles/style.css';
 import refreshSrc from './assets/refresh-svgrepo-com.svg';
 import enterSrc from './assets/arrow-enter-svgrepo-com.svg';
