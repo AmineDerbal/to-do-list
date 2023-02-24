@@ -8,9 +8,17 @@ body {
 #enter-Button,
 .remove-icon {
   width: 15px;
+}
+
+.reload-icon,
+#enter-Button,
+.remove-icon {
   cursor: pointer;
 }
 
+.edit-icon {
+  cursor: move;
+}
 #add-task {
   width: 100%;
   display: flex;
@@ -41,6 +49,12 @@ body {
   width: 100%;
   border: none;
   resize: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .completed {
@@ -72,6 +86,9 @@ body {
   justify-content: space-between;
   padding: 0.5rem 0;
   line-height: 1rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 ul {
@@ -117,4 +134,12 @@ input[type='checkbox'] {
 #todo-list-content {
   width: 100%;
   padding: 0;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.over {
+  border: 2px solid skyblue;
 }
