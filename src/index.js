@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import './styles/style.css';
 import refreshSrc from './assets/refresh-svgrepo-com.svg';
 import enterSrc from './assets/arrow-enter-svgrepo-com.svg';
@@ -30,7 +29,8 @@ refreshIcon.appendChild(imageRefresh);
 
 const submitTask = () => {
   if (taskInput.value !== '') {
-    todoListData.addTask(new Task(taskInput.value));
+    todoListData.list = todoListData.addTask(new Task(taskInput.value));
+    todoListData.renderList();
     taskInput.value = '';
   }
 };

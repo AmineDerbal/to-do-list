@@ -1,23 +1,22 @@
-import editSrc from '../assets/three-dots-svgrepo-com.svg';
-import removeSrc from '../assets/bin-svgrepo-com.svg';
-
 const todoList = document.getElementById('todo-list-content');
 
-export const appendTodoElement = (task, list) => {
+export const appendTodoElement = (task, todo) => {
   const todoElement = document.createElement('li');
   todoElement.className = 'todo-item';
+  todoElement.draggable = true;
 
-  const edit = new Image();
-  edit.src = editSrc;
-  edit.className = 'edit-icon';
+  const edit = document.createElement('i');
+  edit.className = ' fas fa-solid fas fas fa-ellipsis-v edit-icon';
   edit.setAttribute('data-index', task.index);
 
-  const remove = new Image();
-  remove.src = removeSrc;
-  remove.className = 'remove-icon icon-hidden';
+  const remove = document.createElement('i');
+  remove.className = 'remove-icon icon-hidden fas fa-solid fa-trash';
   remove.setAttribute('data-index', task.index);
-  remove.addEventListener('click', () => {
-    list.removeTask(task.index - 1);
+  remove.setAttribute('draggable', 'false');
+  remove.addEventListener('click', (e) => {
+    e.preventDefault();
+    todo.list = todo.removeTask(task.index - 1);
+    todo.renderList();
   });
 
   todoElement.setAttribute('data-index', task.index);
@@ -25,9 +24,11 @@ export const appendTodoElement = (task, list) => {
     task.index
   } type="checkbox" ${
     task.completed ? 'checked' : ''
-  } /> <span> <textarea class="todo-description ${task.completed ? 'completed' : ''}" data-index=${
-    task.index
-  } rows="1" maxlength="100">${task.description}</textarea> </span> </div>`;
+  } /> <span draggable = false> <textarea draggable=false class="todo-description ${
+    task.completed ? 'completed' : ''
+  }" data-index=${task.index} rows="1" maxlength="100">${
+    task.description
+  }</textarea> </span> </div>`;
 
   todoElement.appendChild(remove);
   todoElement.appendChild(edit);
@@ -51,17 +52,20 @@ const toggleHiddenIcon = (event, task) => {
   const listTag = document.querySelector(`li[data-index="${index}"]`);
   listTag.classList.toggle('editing');
   const removeIcon = document.querySelector(`.remove-icon[data-index="${index}"]`);
-  removeIcon.classList.toggle('icon-hidden');
   const editIcon = document.querySelector(`.edit-icon[data-index="${index}"]`);
-  editIcon.classList.toggle('icon-hidden');
+  setTimeout(() => {
+    removeIcon.classList.toggle('icon-hidden');
+    editIcon.classList.toggle('icon-hidden');
+  }, 1000);
 };
 
-export const implementEdit = (Todo) => {
+export const implementEdit = (todo) => {
   const todoEditData = document.querySelectorAll('.todo-description');
   todoEditData.forEach((task) => {
     task.addEventListener('input', (e) => {
       const index = e.target.dataset.index - 1;
-      Todo.editTask(index, e.target.value);
+      todo.list = todo.editTask(index, e.target.value);
+      todo.saveList();
     });
     task.addEventListener('focusin', (e) => {
       toggleHiddenIcon(e, task);
@@ -72,16 +76,20 @@ export const implementEdit = (Todo) => {
   });
 };
 
-export const createClearCompletedElement = (Todo) => {
+export const createClearCompletedElement = (todo) => {
   const clearCompleted = document.createElement('button');
   clearCompleted.id = 'clear-completed';
   clearCompleted.textContent = 'Clear all completed';
   document.getElementById('todo-list-container').appendChild(clearCompleted);
   clearCompleted.addEventListener('click', () => {
-    Todo.filterCompleted();
+    todo.list = todo.filterCompleted();
+    todo.renderList();
   });
 };
 
 export default {
-  appendTodoElement, clearTodoList, implementEdit, createClearCompletedElement,
+  appendTodoElement,
+  clearTodoList,
+  implementEdit,
+  createClearCompletedElement,
 };
