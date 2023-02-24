@@ -1,30 +1,21 @@
-import editSrc from '../assets/three-dots-svgrepo-com.svg';
-import removeSrc from '../assets/bin-svgrepo-com.svg';
-
 const todoList = document.getElementById('todo-list-content');
 
 export const appendTodoElement = (task, list) => {
   const todoElement = document.createElement('li');
   todoElement.className = 'todo-item';
+  todoElement.draggable = true;
 
-  const edit = new Image();
-  edit.src = editSrc;
-  edit.className = 'edit-icon';
+  const edit = document.createElement('i');
+  edit.className = ' fas fa-solid fas fas fa-ellipsis-v edit-icon';
   edit.setAttribute('data-index', task.index);
-  edit.setAttribute('draggable', 'false');
 
-  const remove = new Image();
-  remove.src = removeSrc;
-  remove.className = 'remove-icon icon-hidden';
+  const remove = document.createElement('i');
+  remove.className = 'remove-icon icon-hidden fas fa-solid fa-trash';
   remove.setAttribute('data-index', task.index);
   remove.setAttribute('draggable', 'false');
   remove.addEventListener('click', (e) => {
     e.preventDefault();
     list.removeTask(task.index - 1);
-  });
-  remove.addEventListener('dragstart', (e) => {
-    e.preventDefault();
-    console.log('dragstart');
   });
 
   todoElement.setAttribute('data-index', task.index);
@@ -32,9 +23,11 @@ export const appendTodoElement = (task, list) => {
     task.index
   } type="checkbox" ${
     task.completed ? 'checked' : ''
-  } /> <span> <textarea class="todo-description ${task.completed ? 'completed' : ''}" data-index=${
-    task.index
-  } rows="1" maxlength="100">${task.description}</textarea> </span> </div>`;
+  } /> <span draggable = false> <textarea draggable=false class="todo-description ${
+    task.completed ? 'completed' : ''
+  }" data-index=${task.index} rows="1" maxlength="100">${
+    task.description
+  }</textarea> </span> </div>`;
 
   todoElement.appendChild(remove);
   todoElement.appendChild(edit);
