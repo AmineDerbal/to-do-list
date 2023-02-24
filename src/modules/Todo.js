@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/no-cycle */
 import {
   appendTodoElement,
   clearTodoList,
@@ -7,7 +5,8 @@ import {
   createClearCompletedElement,
 } from './handleDom.js';
 import { saveToLocalStorage } from './data.js';
-import implementCheckBoxEvents from './checkBox.js';
+import implementCheckBoxEvents from './checkbox.js';
+import { dragInteraction } from './dropDrag.js';
 
 export default class Todo {
   constructor(list = []) {
@@ -25,10 +24,16 @@ export default class Todo {
       this.list[i].index = i + 1;
       appendTodoElement(this.list[i], this);
     }
-    saveToLocalStorage(this.list);
+    //saveToLocalStorage(this.list);
+    this.saveList();
     implementEdit(this);
     implementCheckBoxEvents(this);
     createClearCompletedElement(this);
+    dragInteraction(this);
+  };
+
+  saveList = () => {
+    saveToLocalStorage(this.list);
   };
 
   addTask = (task) => {
